@@ -1,4 +1,6 @@
-class Grass extends LivingCreature {
+var LivingCreature = require('./class1.js');
+
+module.exports = class Grass extends LivingCreature {
     mul() {
         this.multiply++;
         var norVandak = random(this.chooseCell(0));

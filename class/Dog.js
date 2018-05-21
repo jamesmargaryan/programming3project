@@ -1,9 +1,9 @@
-class Dog {
+var LivingCreature = require('./class1.js');
+
+module.exports = class Dog extends LivingCreature{
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
+        super(x, y, index);
         this.energy = 9;
-        this.index = index;
     }
     choosenewKordinats() {
         this.directions = [
@@ -16,21 +16,6 @@ class Dog {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-    }
-    chooseCell(character) {
-        this.choosenewKordinats();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
     }
     move() {
         this.energy--;

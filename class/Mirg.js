@@ -1,9 +1,9 @@
-class Mirg {
+var LivingCreature = require('./class1.js');
+
+module.exports = class Mirg extends LivingCreature{
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
-        this.multiply = 0;
+        super(x, y, index);
+
 
     }
     choosenewKordinats() {
