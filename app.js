@@ -35,7 +35,7 @@ for (var y = 0; y < yqanak; y++) {
     matrix[y] = [x];
 
     for (var x = 0; x < xqanak; x++) {
-        matrix[y][x] = Math.round(random(0, 5));
+        matrix[y][x] = Math.round(Math.random()*6);
     }
 }
 
@@ -81,6 +81,7 @@ for (var y = 0; y < matrix.length; ++y) {
 
 
 
+io.on("connection",function){
 socket.on("send message", function (data) {
     setInterval(func, 500);
 
@@ -103,7 +104,8 @@ socket.on("send message", function (data) {
         io.sockets.emit('matrix', matrix);
     }
 
-});
+})
+};
 
 
 

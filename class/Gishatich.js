@@ -30,8 +30,10 @@ module.exports = class Gishatich extends LivingCreature{
         }
     }
     move() {
-        var Cell = random(this.chooseCell(1));
-        if (Cell) {
+        var Cell = rthis.chooseCell(1);
+        var index = Math.floor(Math.random() * Cell.length);
+        var newCell = Cell[index];
+        if (newCell) {
 
             this.energy--;
             var x = Cell[0];
@@ -51,8 +53,11 @@ module.exports = class Gishatich extends LivingCreature{
             }
         }
         else {
-            var Cell  = random(this.chooseCell(0))
-            if(Cell){
+            var Cell  = this.chooseCell(0);
+        var index = Math.floor(Math.random() * Cell.length);
+        var newCell = Cell[index];
+
+            if(newCell){
                 this.energy--;
                 var x = Cell[0];
                 var y = Cell[1];
@@ -79,8 +84,10 @@ module.exports = class Gishatich extends LivingCreature{
 
 
 mul() {
-    var datarkVandakner = this.chooseCell(0);
-    var newCell = random(datarkVandakner);
+
+    var Cell = this.chooseCell(0);
+        var index = Math.floor(Math.random() * Cell.length);
+        var newCell = Cell[index];
 
     if (newCell) {
         var newX = newCell[0];
@@ -94,7 +101,10 @@ mul() {
 }
 eating() {
 
-    var xotvandak2 = random(this.chooseCell(4));
+    var xotvandak2 = this.chooseCell(4);
+        var index = Math.floor(Math.random() * xotvandak2.length);
+        var newCell = xotvandak2[index];
+
     if (xotvandak2) {
         this.move();
 
@@ -102,9 +112,13 @@ eating() {
     else {
         var xotvandak = (this.chooseCell(2));
         var xotvandak3 = (this.chooseCell(5));
-        var xotvandak4 = random(xotvandak.concat(xotvandak3));
+        var mecZangvac = xotvandak.concat(xotvandak3);
+        var xotvandak4 = Math.floor(Math.random() * mecZangvac.length);
+        var newCell = mecZangvac[index];
 
-        if (xotvandak4) {
+
+
+        if (newCell) {
             var newx = xotvandak4[0];
             var newy = xotvandak4[1];
             if (matrix[newy][newx] == 2) {

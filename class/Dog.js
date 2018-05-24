@@ -20,7 +20,8 @@ module.exports = class Dog extends LivingCreature{
     move() {
         this.energy--;
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() *emptyCells.length);
+        var newCell = emptyCells[index];
 
         if (newCell) {
             matrix[this.y][this.x] = 0;
@@ -40,7 +41,8 @@ module.exports = class Dog extends LivingCreature{
     }
     mul() {
         var Cells = this.chooseCell(0);
-        var newCell = random(Cells);
+        var index = Math.floor(Math.random() *Cells.length);
+        var newCell = Cells[index];
 
 
         if (newCell && this.energy >= 13) {
@@ -57,7 +59,9 @@ module.exports = class Dog extends LivingCreature{
     eating() {
 
         var emptyCells = this.chooseCell(5);
-        var newCellGrass = random(emptyCells);
+        var index = Math.floor(Math.random() *emptyCells.length);
+        var newCellGrass = emptyCells[index];
+
         if (newCellGrass) {
             matrix[this.y][this.x] = 0;
             var newX = newCellGrass[0];
