@@ -1,10 +1,33 @@
 var xqanak = 30;
 var yqanak = 30;
 var side = 20;
+var guin = "#acacac";
+var socket = io.connect('http://localhost:3000');
+socket.on('matrix', gcel);
 function setup() {
     createCanvas(xqanak * side, yqanak * side);
     background("#acacac")
 }
+
+socket.on("matrix",gcel);
+
+socket.on("exanak", function(weather){
+    if (weather == "garun"){
+        guin = "#AAD4A4";
+    }
+    else if (weather == "amar"){
+        guin = "#F3CD94";
+    }
+    else if (weather == "ashun"){
+        guin = "#F0F38A";
+    }
+    else if (weather == "dzmer"){
+        guin = "#C2D2D8";
+    }
+
+});
+
+
 
 
 function gcel(matrix) {
@@ -32,7 +55,7 @@ function gcel(matrix) {
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 0) {
-                fill("#acacac");
+                fill(guin);
                 rect(x * side, y * side, side, side);
             }
         }

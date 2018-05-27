@@ -1,6 +1,6 @@
 var LivingCreature = require('./class1.js');
 
-module.exports = class Dog extends LivingCreature{
+module.exports = class Dog extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
         this.energy = 9;
@@ -20,7 +20,7 @@ module.exports = class Dog extends LivingCreature{
     move() {
         this.energy--;
         var emptyCells = this.chooseCell(0);
-        var index = Math.floor(Math.random() *emptyCells.length);
+        var index = Math.floor(Math.random() * emptyCells.length);
         var newCell = emptyCells[index];
 
         if (newCell) {
@@ -41,7 +41,7 @@ module.exports = class Dog extends LivingCreature{
     }
     mul() {
         var Cells = this.chooseCell(0);
-        var index = Math.floor(Math.random() *Cells.length);
+        var index = Math.floor(Math.random() * Cells.length);
         var newCell = Cells[index];
 
 
@@ -55,44 +55,72 @@ module.exports = class Dog extends LivingCreature{
             this.energy = 6;
 
         }
+
+
     }
     eating() {
+        if (weather == "ashun") {
+            var newCellGrass = this.chooseCell(1);
+            var index = Math.floor(Math.random() * newCellGrass.length);
+            var newCell = newCellGrass[index];
 
-        var emptyCells = this.chooseCell(5);
-        var index = Math.floor(Math.random() *emptyCells.length);
-        var newCellGrass = emptyCells[index];
-
-        if (newCellGrass) {
-            matrix[this.y][this.x] = 0;
-            var newX = newCellGrass[0];
-            var newY = newCellGrass[1];
-            matrix[newY][newX] = 4;
-
-            this.y = newY;
-            this.x = newX;
-            this.energy++;
-            for (var i in MirgArr) {
-                if (newX == MirgArr[i].x && newY == MirgArr[i].y) {
-                    MirgArr.splice(i, 1);
-                    break;
+            if (newCell) {
+                matrix[this.y][this.x] = 0;
+                var newX = newCell[0];
+                var newY = newCell[1];
+                matrix[newY][newX] = 2;
+                this.y = newY;
+                this.x = newX;
+                this.energy++;
+                for (var i in grassArr) {
+                    if (newX == grassArr[i].x && newY == grassArr[i].y) {
+                        grassArr.splice(i, 1);
+                        break;
+                    }
                 }
+
+
             }
-
-
-
         }
         else {
-            this.move();
+            var emptyCells = this.chooseCell(5);
+            var index = Math.floor(Math.random() * emptyCells.length);
+            var newCellGrass = emptyCells[index];
+
+            if (newCellGrass) {
+                matrix[this.y][this.x] = 0;
+                var newX = newCellGrass[0];
+                var newY = newCellGrass[1];
+                matrix[newY][newX] = 4;
+
+                this.y = newY;
+                this.x = newX;
+                this.energy++;
+                for (var i in MirgArr) {
+                    if (newX == MirgArr[i].x && newY == MirgArr[i].y) {
+                        MirgArr.splice(i, 1);
+                        break;
+                    }
+                }
+            } else {
+                this.move();
+            }
+            if (this.energy <= 0) {
+                this.dead();
+            }
+            if (this.energy >= 12) {
+                this.mul();
+            }
         }
-        if (this.energy <= 0) {
-            this.dead();
-        }
-        if (this.energy >= 12) {
-            this.mul();
-        }
+
 
 
     }
+
+
+
+
+
     dead() {
         for (var i in DogArr) {
             if (this.x == DogArr[i].x && this.y == DogArr[i].y) {

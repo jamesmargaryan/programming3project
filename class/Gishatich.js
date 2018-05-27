@@ -1,7 +1,7 @@
 var LivingCreature = require('./class1.js');
 
-module.exports = class Gishatich extends LivingCreature{
-    constructor(x, y,index) {
+module.exports = class Gishatich extends LivingCreature {
+    constructor(x, y, index) {
         super(x, y, index);
         this.energy = 10;
 
@@ -30,19 +30,21 @@ module.exports = class Gishatich extends LivingCreature{
         }
     }
     move() {
-        var Cell = rthis.chooseCell(1);
+        var Cell = this.chooseCell(1);
         var index = Math.floor(Math.random() * Cell.length);
         var newCell = Cell[index];
+
+
         if (newCell) {
 
             this.energy--;
-            var x = Cell[0];
-            var y = Cell[1];
+            var x = newCell[0];
+            var y = newCell[1];
             matrix[this.y][this.x] = 0;
             this.x = x;
             this.y = y;
 
-            matrix[this.y][this.x] = 3;
+            matrix[y][x] = 3;
 
             for (var i in grassArr) {
 
@@ -51,16 +53,17 @@ module.exports = class Gishatich extends LivingCreature{
                     break;
                 }
             }
+
         }
         else {
-            var Cell  = this.chooseCell(0);
-        var index = Math.floor(Math.random() * Cell.length);
-        var newCell = Cell[index];
+            var Cell = this.chooseCell(0);
+            var index = Math.floor(Math.random() * Cell.length);
+            var newCell = Cell[index];
 
-            if(newCell){
+            if (newCell) {
                 this.energy--;
-                var x = Cell[0];
-                var y = Cell[1];
+                var x = newCell[0];
+                var y = newCell[1];
                 matrix[this.y][this.x] = 0;
                 this.x = x;
                 this.y = y;
@@ -83,86 +86,88 @@ module.exports = class Gishatich extends LivingCreature{
 
 
 
-mul() {
+    mul() {
 
-    var Cell = this.chooseCell(0);
+        var Cell = this.chooseCell(0);
         var index = Math.floor(Math.random() * Cell.length);
         var newCell = Cell[index];
 
-    if (newCell) {
-        var newX = newCell[0];
-        var newY = newCell[1];
-        matrix[newY][newX] = 3;
+        if (newCell) {
+            var newX = newCell[0];
+            var newY = newCell[1];
+            matrix[newY][newX] = 3;
 
-        var newGishatich = new Gishatich(newX, newY, this.index);
-        GishatichArr.push(newGishatich);
-        this.energy = 6;
+            var newGishatich = new Gishatich(newX, newY, this.index);
+            GishatichArr.push(newGishatich);
+            this.energy = 6;
+        }
     }
-}
-eating() {
+    eating() {
 
-    var xotvandak2 = this.chooseCell(4);
+        var xotvandak2 = this.chooseCell(4);
         var index = Math.floor(Math.random() * xotvandak2.length);
         var newCell = xotvandak2[index];
 
-    if (xotvandak2) {
-        this.move();
-
-    }
-    else {
-        var xotvandak = (this.chooseCell(2));
-        var xotvandak3 = (this.chooseCell(5));
-        var mecZangvac = xotvandak.concat(xotvandak3);
-        var xotvandak4 = Math.floor(Math.random() * mecZangvac.length);
-        var newCell = mecZangvac[index];
-
-
-
-        if (newCell) {
-            var newx = xotvandak4[0];
-            var newy = xotvandak4[1];
-            if (matrix[newy][newx] == 2) {
-                this.energy++;
-                matrix[this.y][this.x] = 0;
-                for (var i in GrassEaterArr) {
-                    if (GrassEaterArr[i].x == xotvandak4[0] && GrassEaterArr[i].y == xotvandak4[1]) {
-
-                        GrassEaterArr.splice(i, 1)
-                        break;
-
-                    }
-                }
-                this.x = xotvandak4[0];
-                this.y = xotvandak4[1];
-                matrix[this.y][this.x] = 3;
-
-                if (this.energy >= 12) {
-                    this.mul();
-                }
-
-            }
-            else if (matrix[newy][newx] == 5) {
-
-                matrix[this.y][this.x] = 0;
-                for (var i in MirgArr) {
-                    if (MirgArr[i].x == xotvandak4[0] && MirgArr[i].y == xotvandak4[1]) {
-                        MirgArr.splice(i, 1);
-                        this.dead();
-                        break;
-
-                    }
-                }
-                this.x = xotvandak4[0];
-                this.y = xotvandak4[1];
-                matrix[this.y][this.x] = 0;
-            }
-
+        if (xotvandak2) {
+            this.move();
 
         }
         else {
-            this.move();
+            var xotvandak = (this.chooseCell(2));
+            var xotvandak3 = (this.chooseCell(5));
+            var mecZangvac = xotvandak.concat(xotvandak3);
+            var xotvandak4 = Math.floor(Math.random() * mecZangvac.length);
+            var newCell = mecZangvac[index];
+
+
+
+            if (newCell) {
+                var newx = xotvandak4[0];
+                var newy = xotvandak4[1];
+                if (matrix[newy][newx] == 2) {
+                    this.energy++;
+                    matrix[this.y][this.x] = 0;
+                    for (var i in GrassEaterArr) {
+                        if (GrassEaterArr[i].x == xotvandak4[0] && GrassEaterArr[i].y == xotvandak4[1]) {
+
+                            GrassEaterArr.splice(i, 1)
+                            break;
+
+                        }
+                    }
+                    this.x = xotvandak4[0];
+                    this.y = xotvandak4[1];
+                    matrix[this.y][this.x] = 3;
+
+                    if (this.energy >= 12) {
+                        this.mul();
+                    }
+
+                }
+                else if (matrix[newy][newx] == 5) {
+
+                    matrix[this.y][this.x] = 0;
+                    for (var i in MirgArr) {
+                        if (MirgArr[i].x == xotvandak4[0] && MirgArr[i].y == xotvandak4[1]) {
+                            MirgArr.splice(i, 1);
+                            this.dead();
+                            break;
+
+                        }
+                    }
+                    this.x = xotvandak4[0];
+                    this.y = xotvandak4[1];
+                    matrix[this.y][this.x] = 0;
+                }
+
+
+            }
+            else {
+                if (weather != "dzmer") {
+                    this.move();
+                }
+            }
         }
     }
-}
 }
 

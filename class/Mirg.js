@@ -25,7 +25,7 @@ module.exports = class Mirg extends LivingCreature{
         var index = Math.floor(Math.random() * datarkVandakner.length);
         var newCell = datarkVandakner[index];
 
-        if (newCell && this.multiply >= 15) {
+        if (newCell && this.multiply >= 6) {
             var norX = newCell[0];
             var norY = newCell[1];
             matrix[norY][norX] = 5;

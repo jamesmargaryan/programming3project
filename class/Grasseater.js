@@ -24,6 +24,7 @@ module.exports = class GrassEater extends LivingCreature {
    }
 
     move() {
+        grasseatermove++;
         this.energy--;
         var Cell = this.chooseCell(0);
         var index = Math.floor(Math.random() * Cell.length);
@@ -59,6 +60,7 @@ module.exports = class GrassEater extends LivingCreature {
 
 
         if (newCell && this.energy >= 12) {
+            grasseatermul++;
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 2;
@@ -77,6 +79,7 @@ module.exports = class GrassEater extends LivingCreature {
         var newCell = newCellGrass[index];
         
         if (newCell) {
+            grasseat++;
             matrix[this.y][this.x] = 0;
             var newX = newCell[0];
             var newY = newCell[1];
@@ -90,13 +93,18 @@ module.exports = class GrassEater extends LivingCreature {
                     break;
                 }
             }
-
+           
 
 
         }
         else {
+           
             this.move();
+           
         }
+        if(weather == "dzmer" && this.energy >= 34) {
+            this.mul();
+    }
         if (this.energy <= 0) {
             this.dead();
         }
